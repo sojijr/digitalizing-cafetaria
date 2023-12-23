@@ -4,7 +4,7 @@ include('include/dbConnect.php');
 session_start();
 
 if (empty($_SESSION['loginUser'])) {
-    header("location: login");
+    header("location: index");
     exit();
 }
 

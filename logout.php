@@ -2,4 +2,4 @@
 session_start();
 unset($_SESSION['loginUser']);
 session_destroy();
-header("Location: login");
+header("Location: index");
