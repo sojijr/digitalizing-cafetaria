@@ -426,47 +426,23 @@ button {
   }  
 
 /* Media Queries for responsiveness */
-@media screen and (max-width: 768px) {
-  body {
-    margin: 0;
-    overflow: hidden;
-}
-  .main-container {
-    width: 30%;
+@media only screen and (max-width: 600px) {
+  .box1 {
+      max-width: 80%;
+      margin: 0;
+      padding: 10px;
   }
-    .box1 {
-        height: auto;
-    }
 
-    .logo {
-        margin-top: 10px;
-    }
+  .main-container {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-    .box2 {
-        font-size: 1.5em;
-    }
-
-    .tagline {
-        font-size: 0.8em;
-    }
-
-    .other {
-        margin-top: 20px; /* Larger margin for responsiveness */
-    }
-
-    .title {
-        font-size: 1.5em;
-    }
-
-    .subtitle {
-        font-size: 0.8em;
-    }
-
-    .input-box {
-        width: 100%;
-    }
-
-    .login-button {
-        width: 100%;
-    }
+  .login-container {
+      max-width: 80%;
+      margin-top: 10px;
+      padding: 20px;
+  }
 }
