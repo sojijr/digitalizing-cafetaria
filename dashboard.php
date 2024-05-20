@@ -142,6 +142,10 @@ if (empty($MatricNo)) {
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
+              <option value="">Milk</option>
+              <option value="">Egg</option>
+              <option value="">Peanut</option>
+              <option value="">Wheat</option>
             </select>
           </div>
           <div class="flex flex-col mb-4">
@@ -153,6 +157,10 @@ if (empty($MatricNo)) {
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
+              <option value="">Rice and Gbadun</option>
+              <option value="">Potato and Eggsauce</option>
+              <option value="">Moi Moi</option>
+              <option value="">Egusi soup</option>
             </select>
           </div>
           <button
