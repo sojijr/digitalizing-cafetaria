@@ -8,14 +8,26 @@ if (empty($_SESSION['loginUser'])) {
 }
 
 $sql = "SELECT * FROM `studentdetails` WHERE StudentMatricNo = '".$_SESSION['loginUser']."'";
-
 $result = $conn->query($sql);
+
 if($result) {
     $rows= mysqli_num_rows($result);
     if($rows == 1) {
         $row = mysqli_fetch_assoc($result);
         $MatricNo = $row['StudentMatricNo'];
         $StudentName = $row['StudentName'];
+        $studentID = $row['StudentID'];
+        $DigitalTicketNo = $row['DigitalTicketNo'];
+
+        $sqlAllergy = "SELECT a.AllergieName FROM `studentallergies` sa
+                       INNER JOIN `allergies` a ON sa.AllergieID = a.AllergieID
+                       WHERE sa.StudentID = '$studentID'";
+        $resultAllergy = $conn->query($sqlAllergy);
+
+        $allergieNames = array();
+        while ($allergyRow = mysqli_fetch_assoc($resultAllergy)) {
+            $allergieNames[] = $allergyRow['AllergieName'];
+        }
     }
 }
 
@@ -108,7 +120,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo $MatricNo ?>
           </p>
         </div>
         <div class="mb-4">
@@ -116,7 +128,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo empty($allergieNames) ? "No Allergies" : implode(", ", $allergieNames); ?>
           </p>
         </div>
         <div class="mb-4">
@@ -124,7 +136,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo $DigitalTicketNo ?>
           </p>
         </div>
       </section>
