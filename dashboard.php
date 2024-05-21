@@ -8,14 +8,26 @@ if (empty($_SESSION['loginUser'])) {
 }
 
 $sql = "SELECT * FROM `studentdetails` WHERE StudentMatricNo = '".$_SESSION['loginUser']."'";
-
 $result = $conn->query($sql);
+
 if($result) {
     $rows= mysqli_num_rows($result);
     if($rows == 1) {
         $row = mysqli_fetch_assoc($result);
         $MatricNo = $row['StudentMatricNo'];
         $StudentName = $row['StudentName'];
+        $studentID = $row['StudentID'];
+        $DigitalTicketNo = $row['DigitalTicketNo'];
+
+        $sqlAllergy = "SELECT a.AllergieName FROM `studentallergies` sa
+                       INNER JOIN `allergies` a ON sa.AllergieID = a.AllergieID
+                       WHERE sa.StudentID = '$studentID'";
+        $resultAllergy = $conn->query($sqlAllergy);
+
+        $allergieNames = array();
+        while ($allergyRow = mysqli_fetch_assoc($resultAllergy)) {
+            $allergieNames[] = $allergyRow['AllergieName'];
+        }
     }
 }
 
@@ -108,7 +120,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo $MatricNo ?>
           </p>
         </div>
         <div class="mb-4">
@@ -116,7 +128,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo empty($allergieNames) ? "No Allergies" : implode(", ", $allergieNames); ?>
           </p>
         </div>
         <div class="mb-4">
@@ -124,7 +136,7 @@ if (empty($MatricNo)) {
           <p
             class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
           >
-            php stuff
+          <?php echo $DigitalTicketNo ?>
           </p>
         </div>
       </section>
@@ -175,20 +187,20 @@ if (empty($MatricNo)) {
       <section
         class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full"
       >
-        <div></div>
+        <div><img src="displayQR.php" alt="qr"></div>
         <button
           class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
         >
-          Digital Ticket No.
+          Digital Ticket No.: <?php echo $DigitalTicketNo ?>
         </button>
         <div class="grid grid-cols-2 gap-2">
           <button
-            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg"
+            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="downloadImage()"
           >
             <img src="./images/fi-download.png" alt="download" />Download
           </button>
           <button
-            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg"
+            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="printDiv()"
           >
             <img src="./images/group.png" alt="download" />Print
           </button>
@@ -196,6 +208,7 @@ if (empty($MatricNo)) {
       </section>
     </main>
     <script src="./js/dash.js"></script>
+    <script src="./js/download.js"></script>
 </body>
 
 </html>
