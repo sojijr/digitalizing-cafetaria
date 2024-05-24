@@ -187,26 +187,29 @@ if (empty($MatricNo)) {
       <section
         class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full"
       >
-        <div><img src="displayQR.php" alt="qr"></div>
-        <button
-          class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
-        >
-          Digital Ticket No.: <?php echo $DigitalTicketNo ?>
-        </button>
+        <div class="qrContainer">
+          <img src="displayQR.php" alt="qr code" id="myImage">
+          <p
+            class="overlap-2 bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
+          >
+            Digital Ticket No.: <?php echo $DigitalTicketNo ?>
+          </p>
+        </div>
         <div class="grid grid-cols-2 gap-2">
-          <button
+          <button id="download"
             class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="downloadImage()"
           >
             <img src="./images/fi-download.png" alt="download" />Download
           </button>
           <button
-            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="printDiv()"
+            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick=""
           >
             <img src="./images/group.png" alt="download" />Print
           </button>
         </div>
       </section>
     </main>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="./js/dash.js"></script>
     <script src="./js/download.js"></script>
 </body>
