@@ -150,14 +150,14 @@ if (empty($MatricNo)) {
               >Item</label
             >
             <select
-              id="item"
+            name="allergie-items"
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
-              <option value="">Milk</option>
-              <option value="">Egg</option>
-              <option value="">Peanut</option>
-              <option value="">Wheat</option>
+              <option value="11">Milk</option>
+              <option value="12">Egg</option>
+              <option value="13">Peanut</option>
+              <option value="14">Wheat</option>
             </select>
           </div>
           <div class="flex flex-col mb-4">
@@ -165,14 +165,14 @@ if (empty($MatricNo)) {
               >Foods</label
             >
             <select
-              id="item"
+            name="allergie-foods"
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
-              <option value="">Rice and Gbadun</option>
-              <option value="">Potato and Eggsauce</option>
-              <option value="">Moi Moi</option>
-              <option value="">Egusi soup</option>
+              <option value="21">Rice and Gbadun</option>
+              <option value="22">Potato and Eggsauce</option>
+              <option value="23">Moi Moi</option>
+              <option value="24">Egusi soup</option>
             </select>
           </div>
           <button
@@ -190,7 +190,7 @@ if (empty($MatricNo)) {
         <div class="qrContainer">
           <img src="displayQR.php" alt="qr code" id="myImage">
           <p
-            class="overlap-2 bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
+            class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
           >
             Digital Ticket No.: <?php echo $DigitalTicketNo ?>
           </p>
@@ -213,5 +213,49 @@ if (empty($MatricNo)) {
     <script src="./js/dash.js"></script>
     <script src="./js/download.js"></script>
 </body>
-
 </html>
+
+<?php
+include('include/dbConnect.php');
+
+if(isset($_POST['submit'])) {
+    $allergieItems = filter_input(INPUT_POST, 'allergie-items');
+    $allergieFoods = filter_input(INPUT_POST, 'allergie-foods');
+
+    $DigitalTicketNo = $MatricNo .$allergieFoods. $allergieItems;
+
+    if (mysqli_connect_error()) {
+        die('Connect Error ('. mysqli_connect_errno() .') '. mysqli_connect_error());
+    } else {
+        if (!empty($allergieItems)) {
+            $sql = "INSERT INTO studentallergies (StudentID, AllergieID)
+                    VALUES ('$studentID', '$allergieItems')";
+
+            if ($conn->query($sql)) {
+                echo "<script>alert('Allergies Selected!');</script>";
+            } else {
+                echo "<script>alert('Unsuccessful Selection for AllergieItems!');</script>";
+            }
+        }
+
+        if (!empty($allergieFoods)) {
+            $sql = "INSERT INTO studentallergies (StudentId, AllergieID)
+                    VALUES ('$studentID', '$allergieFoods')";
+
+            if ($conn->query($sql)) {
+                echo "<script>alert('Allergies Selected!');</script>";
+            } else {
+                echo "<script>alert('Unsuccessful Selection for AllergieFoods!');</script>";
+            }
+        }
+        
+        $sqlTicket = "UPDATE studentdetails 
+              SET DigitalTicketNo = '$DigitalTicketNo'
+              WHERE StudentID = '$studentID'";
+
+        $conn->query($sqlTicket);
+    }
+
+    $conn->close();
+}
+?>
