@@ -44,3 +44,20 @@ ticketBtn.addEventListener("click", function () {
 
 // Call hideAllSections initially to hide profile, allergy and ticket sections
 resetAll();
+
+const menu = document.getElementById("menu");
+const close = document.getElementById("close");
+const menuBar = document.querySelector(".menubar");
+
+menu.addEventListener("click", () => {
+  menuBar.classList.contains("hidden")
+    ? menuBar.classList.remove("hidden")
+    : menuBar.classList.add("hidden");
+});
+close.addEventListener("click", () => {
+  if (!menuBar.classList.contains("hidden")) {
+    menuBar.classList.add("hidden");
+  } else {
+    menuBar.classList.remove("hidden");
+  }
+});

@@ -58,37 +58,59 @@ if (empty($MatricNo)) {
 <body
     class="font-[Satoshi] bg-blue-100 min-h-screen max-w-screen flex justify-center items-center"
   >
-    <main class="md:grid grid-cols-3 w-full bg-white gap-4 md:max-w-[1040px]">
-      <section
-        class="bg-[#E8EEFA] col-span-1 py-8 md:pr-8 text-[#093697] md:pl-12 flex flex-col md:inline-block items-center"
+    <main
+      class="md:grid grid-cols-3 w-full h-full md:h-fit bg-white gap-4 md:max-w-[1040px] relative"
       >
-        <div class="mb-16">
+    <section
+        class="flex md:hidden justify-between items-center px-3 h-[8vh] shadow-md"
+      >
+        <div class="flex items-center gap-3">
+          <img src="./images/BU_logo.jpg" alt="" class="w-8" />
+          <h3 class="text-lg font-medium">Digitalizing Cafeteria</h3>
+        </div>
+        <img src="./images/icon-menu.svg" id="menu" alt="" />
+      </section>
+    
+      <section
+        class="menubar absolute top-0 right-0 h-full p-4 pt-5 shadow-md md:shadow-none rounded-lg md:rounded-none md:static bg-[#E8EEFA] hidden col-span-1 md:py-8 md:pr-8 text-[#093697] md:pl-12 flex flex-col md:inline-block md:items-center"
+      >
+        <img
+          src="./images/icon-menu-close.svg"
+          alt="close"
+          id="close"
+          class="md:hidden w-8 self-end"
+        />
+        <div class="mb-16 hidden md:inline-block">
           <img src="./images/BU_logo.jpg" alt="logo" class="w-24" />
         </div>
 
-        <div class="flex gap-2 my-8 text-black">
-          <img src="./images/image-5.png" alt="avatar" />
+        <div class="flex gap-2 my-8 text-black ml-2 md:ml-0">
+          <img
+          src="./images/image-5.png"
+          alt="avatar"
+          class="hidden md:inline-block"
+          />
           <p class="flex flex-col text-base font-medium">
           <?php echo $StudentName ?>
             <span class="font-normal text-sm"><?php echo $MatricNo ?></span>
           </p>
         </div>
 
-        <div>
+        <div class="mt-4">
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium profile"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium profile"
           >
             <img src="./images/user.png" alt="" />
             <p>Profile</p>
           </div>
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium allergy"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium allergy"
           >
             <img src="./images/touchscreen.png" alt="" />
             <p>Allergy Selection</p>
           </div>
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium ticket"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium ticket"
           >
             <img src="./images/ticket.png" alt="" />
             <p>Ticket</p>
@@ -96,14 +118,14 @@ if (empty($MatricNo)) {
         </div>
 
         <button
-          class="flex my-6 mt-20 gap-2 text-[#AF8B0F] bg-white w-fit py-3 px-4 rounded-lg text-xl font-medium logout"
+          class="flex mt-auto justify-self-end my-6 mt-20 gap-2 text-[#AF8B0F] bg-white w-fit py-3 px-4 rounded-lg text-xl font-medium logout"
         >
           <img src="./images/fi-logout.png" alt="" />
           <p>Logout</p>
         </button>
       </section>
 
-      <section class="welcome-section p-10 col-span-2">
+      <section class="welcome-section p-10 col-span-2 h-[92vh] md:h-fit">
         <h1 class="text-4xl font-bold mb-4">
           Welcome, <span><?php echo $StudentName ?>!</span>
         </h1>
@@ -113,7 +135,7 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center"
+        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center h-[92vh] md:h-fit"
       >
         <div class="mb-4">
           <p class="text-xl font-medium mb-3">Matric No.</p>
@@ -142,7 +164,7 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center"
+        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center h-[92vh] md:h-fit"
       >
         <form method="POST" class="">
           <div class="flex flex-col mb-4">
@@ -185,7 +207,7 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full"
+        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full h-[92vh] md:h-fit"
       >
         <div class="qrContainer">
           <img src="displayQR.php" alt="qr code" id="myImage">
@@ -210,8 +232,9 @@ if (empty($MatricNo)) {
       </section>
     </main>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="./js/dash.js"></script>
-    <script src="./js/download.js"></script>
+    <script src="./js/menu.js" defer></script>
+    <script src="./js/dash.js" defer></script>
+    <script src="./js/download.js" defer></script>
 </body>
 </html>
 
