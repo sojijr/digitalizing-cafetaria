@@ -58,37 +58,59 @@ if (empty($MatricNo)) {
 <body
     class="font-[Satoshi] bg-blue-100 min-h-screen max-w-screen flex justify-center items-center"
   >
-    <main class="md:grid grid-cols-3 w-full bg-white gap-4 md:max-w-[1040px]">
-      <section
-        class="bg-[#E8EEFA] col-span-1 py-8 md:pr-8 text-[#093697] md:pl-12 flex flex-col md:inline-block items-center"
+    <main
+      class="md:grid grid-cols-3 w-full h-full md:h-fit bg-white gap-4 md:max-w-[1040px] relative"
       >
-        <div class="mb-16">
+    <section
+        class="flex md:hidden justify-between items-center px-3 h-[8vh] shadow-md"
+      >
+        <div class="flex items-center gap-3">
+          <img src="./images/BU_logo.jpg" alt="" class="w-8" />
+          <h3 class="text-lg font-medium">Digitalizing Cafeteria</h3>
+        </div>
+        <img src="./images/icon-menu.svg" id="menu" alt="" />
+      </section>
+    
+      <section
+        class="menubar absolute top-0 right-0 h-full p-4 pt-5 shadow-md md:shadow-none rounded-lg md:rounded-none md:static bg-[#E8EEFA] hidden col-span-1 md:py-8 md:pr-8 text-[#093697] md:pl-12 flex flex-col md:inline-block md:items-center"
+      >
+        <img
+          src="./images/icon-menu-close.svg"
+          alt="close"
+          id="close"
+          class="md:hidden w-8 self-end"
+        />
+        <div class="mb-16 hidden md:inline-block">
           <img src="./images/BU_logo.jpg" alt="logo" class="w-24" />
         </div>
 
-        <div class="flex gap-2 my-8 text-black">
-          <img src="./images/image-5.png" alt="avatar" />
+        <div class="flex gap-2 my-8 text-black ml-2 md:ml-0">
+          <img
+          src="./images/image-5.png"
+          alt="avatar"
+          class="hidden md:inline-block"
+          />
           <p class="flex flex-col text-base font-medium">
           <?php echo $StudentName ?>
             <span class="font-normal text-sm"><?php echo $MatricNo ?></span>
           </p>
         </div>
 
-        <div>
+        <div class="mt-4">
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium profile"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium profile"
           >
             <img src="./images/user.png" alt="" />
             <p>Profile</p>
           </div>
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium allergy"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium allergy"
           >
             <img src="./images/touchscreen.png" alt="" />
             <p>Allergy Selection</p>
           </div>
           <div
-            class="flex cursor-pointer mb-4 gap-2 py-2 pl-2 text-xl font-medium ticket"
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium ticket"
           >
             <img src="./images/ticket.png" alt="" />
             <p>Ticket</p>
@@ -96,14 +118,14 @@ if (empty($MatricNo)) {
         </div>
 
         <button
-          class="flex my-6 mt-20 gap-2 text-[#AF8B0F] bg-white w-fit py-3 px-4 rounded-lg text-xl font-medium logout"
+          class="flex mt-auto justify-self-end my-6 mt-20 gap-2 text-[#AF8B0F] bg-white w-fit py-3 px-4 rounded-lg text-xl font-medium logout"
         >
           <img src="./images/fi-logout.png" alt="" />
           <p>Logout</p>
         </button>
       </section>
 
-      <section class="welcome-section p-10 col-span-2">
+      <section class="welcome-section p-10 col-span-2 h-[92vh] md:h-fit">
         <h1 class="text-4xl font-bold mb-4">
           Welcome, <span><?php echo $StudentName ?>!</span>
         </h1>
@@ -113,7 +135,7 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center"
+        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center h-[92vh] md:h-fit"
       >
         <div class="mb-4">
           <p class="text-xl font-medium mb-3">Matric No.</p>
@@ -142,7 +164,7 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center"
+        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center h-[92vh] md:h-fit"
       >
         <form method="POST" class="">
           <div class="flex flex-col mb-4">
@@ -150,14 +172,14 @@ if (empty($MatricNo)) {
               >Item</label
             >
             <select
-              id="item"
+            name="allergie-items"
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
-              <option value="">Milk</option>
-              <option value="">Egg</option>
-              <option value="">Peanut</option>
-              <option value="">Wheat</option>
+              <option value="11">Milk</option>
+              <option value="12">Egg</option>
+              <option value="13">Peanut</option>
+              <option value="14">Wheat</option>
             </select>
           </div>
           <div class="flex flex-col mb-4">
@@ -165,14 +187,14 @@ if (empty($MatricNo)) {
               >Foods</label
             >
             <select
-              id="item"
+            name="allergie-foods"
               class="text-lg rounded-2xl border-2 border-[#093697] bg-[#E8EEFA] py-3 px-4"
             >
               <option value="" disabled selected>Select</option>
-              <option value="">Rice and Gbadun</option>
-              <option value="">Potato and Eggsauce</option>
-              <option value="">Moi Moi</option>
-              <option value="">Egusi soup</option>
+              <option value="21">Rice and Gbadun</option>
+              <option value="22">Potato and Eggsauce</option>
+              <option value="23">Moi Moi</option>
+              <option value="24">Egusi soup</option>
             </select>
           </div>
           <button
@@ -185,30 +207,78 @@ if (empty($MatricNo)) {
       </section>
 
       <section
-        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full"
+        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full h-[92vh] md:h-fit"
       >
-        <div><img src="displayQR.php" alt="qr"></div>
-        <button
-          class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
-        >
-          Digital Ticket No.: <?php echo $DigitalTicketNo ?>
-        </button>
+        <div class="qrContainer">
+          <img src="displayQR.php" alt="qr code" id="myImage">
+          <p
+            class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
+          >
+            Digital Ticket No.: <?php echo $DigitalTicketNo ?>
+          </p>
+        </div>
         <div class="grid grid-cols-2 gap-2">
-          <button
+          <button id="download"
             class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="downloadImage()"
           >
             <img src="./images/fi-download.png" alt="download" />Download
           </button>
           <button
-            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="printDiv()"
+            class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick=""
           >
             <img src="./images/group.png" alt="download" />Print
           </button>
         </div>
       </section>
     </main>
-    <script src="./js/dash.js"></script>
-    <script src="./js/download.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="./js/menu.js" defer></script>
+    <script src="./js/dash.js" defer></script>
+    <script src="./js/download.js" defer></script>
 </body>
-
 </html>
+
+<?php
+include('include/dbConnect.php');
+
+if(isset($_POST['submit'])) {
+    $allergieItems = filter_input(INPUT_POST, 'allergie-items');
+    $allergieFoods = filter_input(INPUT_POST, 'allergie-foods');
+
+    $DigitalTicketNo = $MatricNo .$allergieFoods. $allergieItems;
+
+    if (mysqli_connect_error()) {
+        die('Connect Error ('. mysqli_connect_errno() .') '. mysqli_connect_error());
+    } else {
+        if (!empty($allergieItems)) {
+            $sql = "INSERT INTO studentallergies (StudentID, AllergieID)
+                    VALUES ('$studentID', '$allergieItems')";
+
+            if ($conn->query($sql)) {
+                echo "<script>alert('Allergies Selected!');</script>";
+            } else {
+                echo "<script>alert('Unsuccessful Selection for AllergieItems!');</script>";
+            }
+        }
+
+        if (!empty($allergieFoods)) {
+            $sql = "INSERT INTO studentallergies (StudentId, AllergieID)
+                    VALUES ('$studentID', '$allergieFoods')";
+
+            if ($conn->query($sql)) {
+                echo "<script>alert('Allergies Selected!');</script>";
+            } else {
+                echo "<script>alert('Unsuccessful Selection for AllergieFoods!');</script>";
+            }
+        }
+        
+        $sqlTicket = "UPDATE studentdetails 
+              SET DigitalTicketNo = '$DigitalTicketNo'
+              WHERE StudentID = '$studentID'";
+
+        $conn->query($sqlTicket);
+    }
+
+    $conn->close();
+}
+?>

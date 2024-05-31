@@ -42,6 +42,8 @@ if (isset($_POST['login'])) {
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005,135007,135002,135000" rel="stylesheet">
+                
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login</title>
   </head>
