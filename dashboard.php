@@ -3,7 +3,7 @@ error_reporting(0);
 include('include/dbConnect.php');
 session_start();
 if (empty($_SESSION['loginUser'])) {
-    header("location: index");
+    header("location: ./");
     exit();
 }
 
@@ -14,9 +14,9 @@ if($result) {
     $rows= mysqli_num_rows($result);
     if($rows == 1) {
         $row = mysqli_fetch_assoc($result);
+        $studentID = $row['StudentID'];
         $MatricNo = $row['StudentMatricNo'];
         $StudentName = $row['StudentName'];
-        $studentID = $row['StudentID'];
         $DigitalTicketNo = $row['DigitalTicketNo'];
 
         $sqlAllergy = "SELECT a.AllergieName FROM `studentallergies` sa
@@ -29,14 +29,6 @@ if($result) {
             $allergieNames[] = $allergyRow['AllergieName'];
         }
     }
-}
-
-if (empty($StudentName)) {
-    $StudentName = "User";
-}
-
-if (empty($MatricNo)) {
-    $MatricNo = $_SESSION['loginUser'];
 }
 
 ?>
@@ -59,7 +51,7 @@ if (empty($MatricNo)) {
     class="font-[Satoshi] bg-blue-100 min-h-screen max-w-screen flex justify-center items-center"
   >
     <main
-      class="md:grid grid-cols-3 w-full h-full md:h-fit bg-white gap-4 md:max-w-[1040px] relative"
+      class="md:grid grid-cols-3 w-full h-full md:h-fit bg-white gap-4 md:max-w-[1000px] relative"
       >
     <section
         class="flex md:hidden justify-between items-center px-3 h-[8vh] shadow-md"
@@ -80,52 +72,60 @@ if (empty($MatricNo)) {
           id="close"
           class="md:hidden w-8 self-end"
         />
-        <div class="mb-16 hidden md:inline-block">
+        <div class="mb-7 hidden md:inline-block">
           <img src="./images/BU_logo.jpg" alt="logo" class="w-24" />
         </div>
 
-        <div class="flex gap-2 my-8 text-black ml-2 md:ml-0">
+        <div class="flex gap-2 my-6 text-black ml-2 md:ml-0">
           <img
           src="./images/image-5.png"
           alt="avatar"
           class="hidden md:inline-block"
           />
-          <p class="flex flex-col text-base font-medium">
+          <p class="text-[21px] flex flex-col font-medium">
           <?php echo $StudentName ?>
             <span class="font-normal text-sm"><?php echo $MatricNo ?></span>
           </p>
         </div>
 
         <div class="mt-4">
+        <div
+            class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium dashboard"
+          >
+            <p><i class="fas fa-home"></i> Dashboard</p>
+          </div>
+
           <div
             class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium profile"
           >
-            <img src="./images/user.png" alt="" />
-            <p>Profile</p>
+            <p><i class="fas fa-user"></i> Profile</p>
           </div>
+
           <div
             class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium allergy"
           >
-            <img src="./images/touchscreen.png" alt="" />
-            <p>Allergy Selection</p>
+            <p><i class="fa-solid fa-hand-pointer"></i> Allergy Selection</p>
           </div>
+
           <div
             class="flex cursor-pointer mb-4 gap-2 py-2 px-2 text-xl font-medium ticket"
           >
-            <img src="./images/ticket.png" alt="" />
-            <p>Ticket</p>
+            <p><i class="fa-solid fa-ticket"></i> Ticket</p>
           </div>
         </div>
 
+        <a href = "include/logout.php">
         <button
+          type="submit"
           class="flex mt-auto justify-self-end my-6 mt-20 gap-2 text-[#AF8B0F] bg-white w-fit py-3 px-4 rounded-lg text-xl font-medium logout"
         >
-          <img src="./images/fi-logout.png" alt="" />
-          <p>Logout</p>
+          <p><i class="fa-solid fa-right-from-bracket"></i> Logout</p>
         </button>
+        </a>
       </section>
 
-      <section class="welcome-section p-10 col-span-2 h-[92vh] md:h-fit">
+      <!-- Welcome Section -->
+      <section class="welcome-section p-10 col-span-2 h-[92vh] md:h-fit" data-section="welcome">
         <h1 class="text-4xl font-bold mb-4">
           Welcome, <span><?php echo $StudentName ?>!</span>
         </h1>
@@ -134,8 +134,9 @@ if (empty($MatricNo)) {
         </div>
       </section>
 
+      <!-- Profile Section -->
       <section
-        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center h-[92vh] md:h-fit"
+        class="profile-section hidden col-span-2 p-10 flex flex-col justify-center h-[92vh] md:h-fit" data-section="profile"
       >
         <div class="mb-4">
           <p class="text-xl font-medium mb-3">Matric No.</p>
@@ -163,10 +164,11 @@ if (empty($MatricNo)) {
         </div>
       </section>
 
+      <!-- Allergy Section -->
       <section
-        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center h-[92vh] md:h-fit"
+        class="allergy-section hidden p-16 col-span-2 flex flex-col justify-center h-[92vh] md:h-fit" data-section="allergie"
       >
-        <form method="POST" class="">
+        <form method="POST" action="include/allergie.php" class="">
           <div class="flex flex-col mb-4">
             <label for="item" class="text-[1.49rem] font-semibold mb-2"
               >Item</label
@@ -199,6 +201,7 @@ if (empty($MatricNo)) {
           </div>
           <button
             type="submit"
+            name="allergie-submit"
             class="bg-[#AF8B0F] text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
           >
             Update Selection
@@ -206,9 +209,11 @@ if (empty($MatricNo)) {
         </form>
       </section>
 
+      <!-- Ticket Section -->
       <section
-        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full h-[92vh] md:h-fit"
+        class="ticket-section hidden col-span-2 flex flex-col justify-center items-center w-full h-[92vh] md:h-fit" data-section="ticket"
       >
+        <h1 class="text-4xl font-bold mb-7"></h1>
         <div class="qrContainer">
           <img src="displayQR.php" alt="qr code" id="myImage">
           <p
@@ -221,12 +226,12 @@ if (empty($MatricNo)) {
           <button id="download"
             class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick="downloadImage()"
           >
-            <img src="./images/fi-download.png" alt="download" />Download
+          <i class="fa-solid fa-download"></i> Download
           </button>
           <button
             class="bg-[#093697] text-white px-3 py-2 rounded-xl flex items-center gap-2 text-lg" onclick=""
           >
-            <img src="./images/group.png" alt="download" />Print
+          <i class="fa-solid fa-print"></i> Print
           </button>
         </div>
       </section>
@@ -237,48 +242,3 @@ if (empty($MatricNo)) {
     <script src="./js/download.js" defer></script>
 </body>
 </html>
-
-<?php
-include('include/dbConnect.php');
-
-if(isset($_POST['submit'])) {
-    $allergieItems = filter_input(INPUT_POST, 'allergie-items');
-    $allergieFoods = filter_input(INPUT_POST, 'allergie-foods');
-
-    $DigitalTicketNo = $MatricNo .$allergieFoods. $allergieItems;
-
-    if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .') '. mysqli_connect_error());
-    } else {
-        if (!empty($allergieItems)) {
-            $sql = "INSERT INTO studentallergies (StudentID, AllergieID)
-                    VALUES ('$studentID', '$allergieItems')";
-
-            if ($conn->query($sql)) {
-                echo "<script>alert('Allergies Selected!');</script>";
-            } else {
-                echo "<script>alert('Unsuccessful Selection for AllergieItems!');</script>";
-            }
-        }
-
-        if (!empty($allergieFoods)) {
-            $sql = "INSERT INTO studentallergies (StudentId, AllergieID)
-                    VALUES ('$studentID', '$allergieFoods')";
-
-            if ($conn->query($sql)) {
-                echo "<script>alert('Allergies Selected!');</script>";
-            } else {
-                echo "<script>alert('Unsuccessful Selection for AllergieFoods!');</script>";
-            }
-        }
-        
-        $sqlTicket = "UPDATE studentdetails 
-              SET DigitalTicketNo = '$DigitalTicketNo'
-              WHERE StudentID = '$studentID'";
-
-        $conn->query($sqlTicket);
-    }
-
-    $conn->close();
-}
-?>
