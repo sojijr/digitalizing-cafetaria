@@ -6,13 +6,6 @@ if (isset($_POST['login'])) {
     $MatricNo = $_POST['MatricNo'];
     $Password = md5($_POST['Password']);
 
-    $sql= "SELECT * FROM studentdetails WHERE StudentMatricNo = '$MatricNo'";
-    $result =$conn->query($sql);
-
-    $user_matched = mysqli_num_rows($result);
-    $row = mysqli_fetch_assoc($result);
-    if ($user_matched > 0) {
-
         $sql= "SELECT * FROM studentdetails WHERE StudentMatricNo = '$MatricNo' && Password = '$Password'";
         $result =$conn->query($sql);
 
@@ -22,14 +15,8 @@ if (isset($_POST['login'])) {
             $_SESSION['loginUser'] = $row['StudentMatricNo'];
             header("location: dashboard");
         } else {
-            echo "<script>alert('Invalid Details!')</script>";
+            echo "<script>alert('Invalid details')</script>";
         }
-    } else {
-        $_SESSION['loginUser'] = $MatricNo;
-        header("location: dashboard");
-    }
-
-
 }
 ?>
 
@@ -49,19 +36,19 @@ if (isset($_POST['login'])) {
   </head>
 
   <body
-    class="font-[Satoshi] bg-blue-100 min-h-screen max-w-screen flex justify-center items-center"
+    class="bg-[#f2f2f2] font-[Satoshi] min-h-screen max-w-screen flex justify-center items-center"
   >
-    <main class="md:grid grid-cols-2 w-full bg-white gap-4 md:max-w-[1040px]">
+    <main class="md:grid grid-cols-2 w-full bg-white gap-4 md:max-w-[900px]">
       <section
         class="bg-[#093697] py-8 md:pr-10 text-[#FEFEFE] md:pl-20 flex flex-col md:inline-block items-center"
       >
         <div class="mb-16 mt-5">
           <img src="./images/BU_logo.jpg" alt="logo" class="w-20" />
         </div>
-        <h1 class="text-[56px] font-bold leading-tight mb-5">
+        <h1 class="text-[56px] font-bold leading-tight mb-3">
           Digitalizing <br />Cafeteria
         </h1>
-        <p class="font-light text-lg">Making food better...</p>
+        <p class="text-[#fefefe80] font-light text-lg">Making food better...</p>
       </section>
 
       <section
@@ -75,7 +62,7 @@ if (isset($_POST['login'])) {
             <label for="MatricNo" class="text-lg font-medium mb-2"
               >Matric No.</label
             >
-            <div class="border-2 rounded-2xl p-3 border-[#093697] bg-blue-100">
+            <div class="border-2 rounded-2xl px-9 p-3 border-[#093697] bg-blue-100">
               <input
                 class="outline-none border-none h-full w-full text-xl placeholder:font-light bg-blue-100"
                 type="text"
@@ -90,7 +77,7 @@ if (isset($_POST['login'])) {
               >Password</label
             >
             <div
-              class="border-2 rounded-2xl p-3 border-[#093697] bg-blue-100 flex items-center"
+              class="border-2 rounded-2xl px-9 p-3 border-[#093697] bg-blue-100 flex items-center"
             >
               <input
                 class="outline-none border-none h-full bg-blue-100 w-full text-xl placeholder:font-light"
@@ -112,6 +99,12 @@ if (isset($_POST['login'])) {
         </form>
       </section>
     </main>
+    <script>
+      if (window.location.search.includes('logout=true')) {
+            localStorage.clear();
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+      </script>
     <script src="./js/script.js"></script>
   </body>
 </html>

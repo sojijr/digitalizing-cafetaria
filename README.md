@@ -1,7 +1,5 @@
 # Digitalizing Cafetaria
 
-Still building..
-
 ## How to Use this Repo
 1- Fork this repository. <br/>
 2- Download/clone this repository in Xampp/htdocs or wamp64/www. <br/>
