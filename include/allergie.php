@@ -54,7 +54,7 @@ if(isset($_POST['allergie-submit'])) {
 
         if($conn->query($sqlTicket)){
             echo "<script>alert('Allergies Selected!');";
-            echo "window.location.href='../dashboard';</script>";
+            echo "window.location.href='../dashboard.php';</script>";
         } else {
             echo "<script>alert('Unsuccessful Selection!');</script>";
         }

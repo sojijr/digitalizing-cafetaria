@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($result);
         if ($user_matched > 0) {
             $_SESSION['loginUser'] = $row['StudentMatricNo'];
-            header("location: dashboard");
+            header("location: dashboard.php");
         } else {
             echo "<script>alert('Invalid details')</script>";
         }
