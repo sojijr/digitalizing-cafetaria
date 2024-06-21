@@ -57,7 +57,7 @@ if($result) {
         class="flex md:hidden justify-between items-center px-3 h-[8vh] shadow-md"
       >
         <div class="flex items-center gap-3">
-          <img src="./images/BU_logo.jpg" alt="" class="w-8" />
+          <img src="./images/logo.jpg" alt="" class="w-8" />
           <h3 class="text-lg font-medium">Digitalizing Cafeteria</h3>
         </div>
         <img src="./images/icon-menu.svg" id="menu" alt="" />
@@ -73,7 +73,7 @@ if($result) {
           class="md:hidden w-8 self-end"
         />
         <div class="mb-7 hidden md:inline-block">
-          <img src="./images/BU_logo.jpg" alt="logo" class="w-24" />
+          <img src="./images/logo.jpg" alt="logo" class="w-24" />
         </div>
 
         <div class="flex gap-2 my-6 text-black ml-2 md:ml-0">
@@ -240,5 +240,10 @@ if($result) {
     <script src="./js/menu.js" defer></script>
     <script src="./js/dash.js" defer></script>
     <script src="./js/download.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.history.replaceState(null, null, 'dashboard');
+        });
+    </script>
 </body>
 </html>

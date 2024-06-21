@@ -43,7 +43,7 @@ if (isset($_POST['login'])) {
         class="bg-[#093697] py-8 md:pr-10 text-[#FEFEFE] md:pl-20 flex flex-col md:inline-block items-center"
       >
         <div class="mb-16 mt-5">
-          <img src="./images/BU_logo.jpg" alt="logo" class="w-20" />
+          <img src="./images/logo.jpg" alt="logo" class="w-20" />
         </div>
         <h1 class="text-[56px] font-bold leading-tight mb-3">
           Digitalizing <br />Cafeteria
