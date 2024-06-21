@@ -157,10 +157,8 @@ if($result) {
         </div>
         <div class="mb-4">
           <p class="text-xl font-medium mb-3">Digital Ticket No.</p>
-          <p
-            class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4"
-          >
-          <?php echo $DigitalTicketNo ?>
+          <p class="text-lg border-2 border-[#093697] rounded-xl bg-[#E8EEFA] py-3 px-4 break-all">
+            <?php echo $DigitalTicketNo ?>
           </p>
         </div>
       </section>
@@ -217,9 +215,7 @@ if($result) {
         <h1 class="text-4xl font-bold mb-7"></h1>
         <div class="qrContainer">
           <img src="displayQR.php" alt="qr code" id="myImage">
-          <p
-            class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A]"
-          >
+          <p class="bg-[#AF8B0F] mb-3 text-white mt-4 px-5 py-3 text-xl rounded-2xl hover:bg-[#AF8E2A] break-all">
             Digital Ticket No.: <?php echo $DigitalTicketNo ?>
           </p>
         </div>
@@ -241,10 +237,10 @@ if($result) {
     <script src="./js/menu.js" defer></script>
     <script src="./js/dash.js" defer></script>
     <script src="./js/download.js" defer></script>
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.history.replaceState(null, null, 'dashboard');
         });
-    </script>
+    </script> -->
 </body>
 </html>
