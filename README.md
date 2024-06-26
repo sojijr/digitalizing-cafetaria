@@ -1,5 +1,11 @@
 # Digitalizing Cafetaria
 
+### Preview:
+
+<p align="center">
+<img src="https://github.com/sojijr/digitalizing-cafetaria/blob/master/images/preview.png" height="auto" width="80%">
+</p>
+
 ## How to Use this Repo
 1- Fork this repository. <br/>
 2- Download/clone this repository in Xampp/htdocs or wamp64/www. <br/>
